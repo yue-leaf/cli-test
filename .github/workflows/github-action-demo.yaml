@@ -32,7 +32,12 @@ jobs:
           echo "Sign firmware..."
           ./snb kms sign -k 01 -a hmac -f ./myapp -o signed_firmware.bin
       - name: Upload build artifacts
+        id: upload_artifact
         uses: actions/upload-artifact@v4
         with:
           name: myapp
           path: ./myapp
+      - name: Get artifact download URL
+        run: |
+            DOWNLOAD_URL="${{ steps.upload_artifact.outputs.artifact-url }}"
+            echo "Artifact download URL: $DOWNLOAD_URL"
