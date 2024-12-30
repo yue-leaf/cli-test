@@ -9,3 +9,10 @@ jobs:
     steps:
       - name: Print a message
         run: echo "Hello, World!"
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+            go-version: '1.20'
+        run: go version
