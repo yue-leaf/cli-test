@@ -25,6 +25,8 @@ jobs:
       - name: Run myapp
         run: |
           ./myapp
+      - name: Set execute permissions for snb
+        run: chmod +x ./snb
       - name: Sign firmware
         run: |
           echo "Sign firmware..."
