@@ -25,3 +25,7 @@ jobs:
       - name: Run myapp
         run: |
           ./myapp
+      - name: Sign firmware
+        run: |
+          echo "Sign firmware..."
+          ./snb kms sign -k 01 -a hmac -f ./myapp -o signed_firmware.bin
