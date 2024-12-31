@@ -6,6 +6,9 @@ on:
 jobs:
   run-github-actions:
     runs-on: ubuntu-latest
+    env:
+      snbAccessKey: ${{ secrets.ACCESS_KEY }}
+      snbSecretKey: ${{ secrets.SECRET_KEY }}
     steps:
       - name: Print a message
         run: echo "Hello, World!"
@@ -30,6 +33,8 @@ jobs:
       - name: Sign firmware
         run: |
           echo "Sign firmware..."
+          echo $snbAccessKey
+          echo $snbSecretKey
           ./snb kms sign -k 01 -a hmac -f ./myapp -o signed_firmware.bin
       - name: Upload build artifacts
         id: upload_artifact
