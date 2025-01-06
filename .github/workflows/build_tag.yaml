@@ -36,7 +36,7 @@ jobs:
           echo "$snbAccessKey"
           echo "$snbSecretKey"
           echo "$SIGN_KEY_ID"
-          ./snb kms sign -k 01 -a hmac -f ./myapp -o signed_firmware.bin
+          ./snb kms sign -k 01 -f ./myapp -o signed_firmware.bin
       - name: Upload build artifacts
         id: upload_artifact
         uses: actions/upload-artifact@v4
