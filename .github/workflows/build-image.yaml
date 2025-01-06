@@ -36,3 +36,4 @@ jobs:
         run: |
           docker push ghcr.io/${{ github.repository }}/cli-test:${{ github.sha }}
 
+
