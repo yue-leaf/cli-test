@@ -17,22 +17,22 @@ jobs:
           echo ${{ github.ref_name }}
 
       - name: Get Release Details
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const tagName = '${{ github.ref }}'.replace('refs/tags/', '');
-            const release = await github.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: tagName
-            });
-            const title = release.data.name;
-            const description = release.data.body;
-            
-            console.log(`Release Title: ${title}`);
-            console.log(`Release Description: ${description}`);
-            
-            return { title, description };
+        id: release_details
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}  # 获取当前的 tag 名称
+          RELEASE_DATA=$(curl -s -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
+            "https://api.github.com/repos/${{github.repository}}/releases/tags/$TAG")
+          
+          # 获取标题和描述
+          TITLE=$(echo "$RELEASE_DATA" | jq -r '.name')  # Release Title
+          DESCRIPTION=$(echo "$RELEASE_DATA" | jq -r '.body')  # Release Description
+          
+          echo "Release Title: $TITLE"
+          echo "Release Description: $DESCRIPTION"
+          
+          # 设置输出，供后续步骤使用
+          echo "::set-output name=release_title::$TITLE"
+          echo "::set-output name=release_description::$DESCRIPTION"
 
       - name: Checkout code
         uses: actions/checkout@v1
