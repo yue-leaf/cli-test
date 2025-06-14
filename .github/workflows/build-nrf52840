@@ -3,7 +3,7 @@ name: Build nRF Connect SDK Coprocessor Example
 on:
   push:
     branches:
-      - dev
+      - main
 
 
 jobs:
