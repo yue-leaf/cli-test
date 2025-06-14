@@ -33,7 +33,7 @@ jobs:
         run: |
           echo ls
           cd nrf/samples/openthread/coprocessor
-          west build -b nrf52840dongle_nrf52840
+          west build -b nrf52840dongle/nrf52840
 
       - name: Upload Firmware Artifact
         uses: actions/upload-artifact@v4
