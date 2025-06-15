@@ -21,22 +21,23 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git ninja-build gperf ccache dfu-util python3-pip
-          pip3 install west
+          sudo apt-get install cmake gcc-arm-none-eabi
 
-      - name: Setup nRF Connect SDK
-        run: |
-          west init -m https://github.com/nrfconnect/sdk-nrf --mr ${{ env.NRF_SDK_VERSION }}
-          west update
 
-      - name: Build coprocessor example
+      - name: Setup 
         run: |
+          git clone --recursive https://github.com/openthread/ot-nrf528xx.git
+          cd ot-nrf528xx
+          git submodule update --init
+          ./script/bootstrap
           echo ls
-          cd nrf/samples/openthread/coprocessor
-          west build -b nrf52840dongle/nrf52840
+          ./script/build nrf52840 USB_trans -DOT_BOOTLOADER=USB
+          echo ls
+          echo pwd
 
+   
       - name: Upload Firmware Artifact
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: nrf/samples/openthread/coprocessor/build/zephyr/zephyr.hex
+          path: output/nrf52840/bin/ot-rcp.hex
