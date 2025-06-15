@@ -36,7 +36,7 @@ jobs:
           pwd
           cd build
           ls
-          cd output
+          cd bin
           ls
 
    
