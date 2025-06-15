@@ -34,6 +34,10 @@ jobs:
           ./script/build nrf52840 USB_trans -DOT_BOOTLOADER=USB
           ls
           pwd
+          cd build
+          ls
+          cd output
+          ls
 
    
       - name: Upload Firmware Artifact
