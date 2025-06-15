@@ -32,7 +32,7 @@ jobs:
           ./script/bootstrap
           echo ls
           ./script/build nrf52840 USB_trans -DOT_BOOTLOADER=USB
-          arm-none-eabi-objcopy -O ihex build/bin/ot-rcp build/bin/ot-rcp/ot-rcp.hex
+          arm-none-eabi-objcopy -O ihex build/bin/ot-rcp build/bin/ot-rcp
 
 
    
