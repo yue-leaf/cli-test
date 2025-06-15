@@ -32,8 +32,8 @@ jobs:
           ./script/bootstrap
           echo ls
           ./script/build nrf52840 USB_trans -DOT_BOOTLOADER=USB
-          echo ls
-          echo pwd
+          ls
+          pwd
 
    
       - name: Upload Firmware Artifact
